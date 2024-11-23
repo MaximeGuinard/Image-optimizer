@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OptiImage Pro - Optimiseur d'Images Professionnel</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OptiImage<span class="pro-badge">PRO</span></h1>
+            <p class="subtitle">Solution professionnelle d'optimisation d'images</p>
+        </header>
+        
+        <div class="upload-zone" id="dropZone">
+            <input type="file" id="fileInput" accept="image/*" multiple hidden>
+            <div class="upload-content">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%238a77eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E" alt="Upload">
+                <p>Glissez vos images ici ou <span class="browse-btn">parcourez</span></p>
+                <span class="support-text">Formats supportés: JPG, PNG, WebP</span>
+            </div>
+        </div>
+
+        <div class="settings-container">
+            <div class="settings-header">
+                <h2>Paramètres avancés</h2>
+                <button id="presetBtn" class="preset-btn">Presets</button>
+            </div>
+
+            <div class="settings">
+                <div class="settings-group">
+                    <h3>Qualité</h3>
+                    <div class="quality-slider">
+                        <label for="quality">Compression: <span id="qualityValue">80%</span></label>
+                        <input type="range" id="quality" min="1" max="100" value="80">
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Dimensions</h3>
+                    <div class="dimension-controls">
+                        <div class="max-width">
+                            <label for="maxWidth">Largeur max:</label>
+                            <input type="number" id="maxWidth" value="1920" min="100" max="4096">
+                        </div>
+                        <div class="maintain-ratio">
+                            <input type="checkbox" id="maintainRatio" checked>
+                            <label for="maintainRatio">Conserver les proportions</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Format de sortie</h3>
+                    <div class="format-options">
+                        <select id="outputFormat">
+                            <option value="auto">Auto (Recommandé)</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WebP</option>
+                            <option value="png">PNG</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Options avancées</h3>
+                    <div class="advanced-options">
+                        <div class="option">
+                            <input type="checkbox" id="removeMetadata" checked>
+                            <label for="removeMetadata">Supprimer les métadonnées</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="autoOptimize" checked>
+                            <label for="autoOptimize">Optimisation automatique</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="batch-actions">
+            <button id="optimizeAll" class="action-btn">Optimiser tout</button>
+            <button id="downloadAll" class="action-btn">Tout télécharger</button>
+            <button id="clearAll" class="action-btn secondary">Effacer tout</button>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat">
+                <span class="stat-label">Images traitées:</span>
+                <span id="processedCount" class="stat-value">0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Espace économisé:</span>
+                <span id="savedSpace" class="stat-value">0 KB</span>
+            </div>
+        </div>
+
+        <div class="preview-zone" id="previewZone"></div>
+    </div>
+
+    <div id="presetModal" class="modal">
+        <div class="modal-content">
+            <h3>Presets d'optimisation</h3>
+            <div class="preset-list">
+                <button class="preset" data-quality="90" data-width="1920">Web - Haute qualité</button>
+                <button class="preset" data-quality="70" data-width="1200">Web - Performance</button>
+                <button class="preset" data-quality="60" data-width="800">Réseaux sociaux</button>
+                <button class="preset" data-quality="40" data-width="400">Miniatures</button>
+            </div>
+            <button class="close-modal">Fermer</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
